@@ -17,6 +17,7 @@
 # - maybe even have a --major-only option, to filter out updates in the 3rd digit, like 2.6.4 => 2.6.5
 
 aptx() (
+
     docstr="Perform Apt and Dpkg operations
 
     This function facilitates common package management operations. It
@@ -24,7 +25,7 @@ aptx() (
 
     Usage
 
-      $FUNCNAME <cmd> [opts ...] [args ...]
+      aptx <cmd> [opts ...] [args ...]
 
     Commands
 
