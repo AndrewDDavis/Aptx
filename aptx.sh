@@ -1,6 +1,7 @@
 # APT package manager
 
 # TODO
+# - readme formatting
 # - when running a sno search with a fair number of outputs, aptx takes too long to produce the output, e.g. `aptx sno texlive`
 # - in the "why" item, check for manual installed and bold them
 # - introduce more apt prefs and sources like [this](https://www.reddit.com/r/debian/comments/1cdkax2/comment/l1crknz/)
@@ -285,7 +286,7 @@ aptx() (
             # if only major updates requested, filter the list
             [[ -z ${major-} ]] || {
                 # awk -f ~/Projects/Shell\ Operation/Bash/bash.d/sys_admin/apt_filt_ud.awk udlist
-                local awk_src=$( dirname "${BASH_SOURCE[0]}" )/apt_filt_ud.awk
+                local awk_src=$( dirname "$( canonpath "${BASH_SOURCE[0]}" )" )/apt_filt_ud.awk
                 ug_pkgs=$( awk -f "$awk_src" - <<< "$ug_pkgs" )
 
                 # count major upgrades
