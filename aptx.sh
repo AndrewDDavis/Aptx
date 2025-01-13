@@ -64,10 +64,10 @@ aptx() (
        ap : autopurge package(s)
       prc : purge removed packages that have residual config (rc)
 
-      hold : hold package (prevents upgrade, removal)
-    unhold : remove hold on package
-     marka : mark package(s) as automatically installed
-     markm : mark package(s) as manually installed
+        hold : hold package (prevents upgrade, removal)
+      unhold : remove hold on package
+    markauto : mark package(s) as automatically installed
+     markman : mark package(s) as manually installed
 
     rdepi : show installed pkgs that are immediate reverse-deps of a package
       why : recursive rdepi of a package (AKA rdepir)
@@ -276,7 +276,7 @@ aptx() (
         if [[ -n ${shrt_op-}  &&  $ug_n -gt 24 ]]
         then
             # "short" output requested, just print n for large n
-            printf '\n%s\n' "${ug_n_str}. Run 'aptx lsu' to see a list."
+            printf '\n%s\n' "${ug_n_str}. Run 'aptx lsu' or 'lsum' to see a list."
 
         elif [[ $ug_n -gt 0 ]]
         then
@@ -539,10 +539,10 @@ aptx() (
         ( unhold )
             run_priv apt-mark unhold "$@"
         ;;
-        ( marka )
+        ( markauto )
             run_priv apt-mark auto "$@"
         ;;
-        ( markm )
+        ( markman )
             run_priv apt-mark manual "$@"
         ;;
         ( r )
