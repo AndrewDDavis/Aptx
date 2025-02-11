@@ -63,6 +63,7 @@ aptx() (
       arm : autoremove package(s)
        ap : autopurge package(s)
       prc : purge removed packages that have residual config (rc)
+       cc : run clean and autoclean, to remove all downloaded package files
 
         hold : hold package (prevents upgrade, removal)
       unhold : remove hold on package
@@ -439,6 +440,10 @@ aptx() (
         ;;
         ( ap )
             run_priv apt autopurge "$@"
+        ;;
+        ( cc )
+            run_priv apt clean "$@"
+            run_priv apt autoclean "$@"
         ;;
         ( prc )
             # purge residual-config
