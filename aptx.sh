@@ -38,10 +38,11 @@ aptx() (
      innr : install with --no-install-recommends
 
        ug : upgrade package(s) (safest, no install or remove)
-      nug : upgrade --with-new-pkgs, but explicitly prevents removal. This can also be
-            useful when the install command would remove packages and that is undesirable,
-            and can be used as 'nug --mark-auto <pkg>' to upgrade a specific package
-            without marking it as manually installed.
+      nug : upgrade --with-new-pkgs, but explicitly prevents removal. This is a safe
+            option between ug and fug. It is expecially useful when the install or
+            full-upgrade commands would remove packages that are needed. It can be used
+            as 'nug --mark-auto <pkg>' to upgrade a specific package without marking it
+            as manually installed.
       fug : full-upgrade (AKA dist-upgrade, may remove packages)
      snug : simulated nug (uses --trivial-only for brief output). For more
             complete simulation output, showing breakages in [...], use
@@ -334,6 +335,7 @@ aptx() (
 
         if [[ $skb == True ]]
         then
+            # TODO: run and filter apt, rather than apt-get
             run_priv apt-get $ugcmd "$@" | \
                 sed -E '/^The following packages have been kept back:/,/^[^ ]/ {
                             /^The following.+kept back:/ { p; s/.*/  .../; p; d; }
