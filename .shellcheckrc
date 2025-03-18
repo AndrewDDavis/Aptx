@@ -1,0 +1,8 @@
+# Allow opening any sourced file, even if not specified as input
+external-sources=true
+
+# disable warnings about no expansions in single quotes
+disable=SC2016
+
+# this is Bash function
+shell=bash

@@ -121,8 +121,8 @@ aptx() (
     }
 
     # boldify or dimify with e.g. "${_bld}...${_rst}"
-    # - for more, see the str_csi_vars function:
-    # [[ -z ${_cbo:-} ]] && str_csi_vars -pd
+    # - for more, see the csi_strvars function:
+    # [[ -n ${_cbo-} ]] || csi_strvars -pd
     _bld=$'\e[1m'
     _dim=$'\e[2m'
     _rst=$'\e[0m'
