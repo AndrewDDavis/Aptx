@@ -288,7 +288,7 @@ aptx() (
             # if only major updates requested, filter the list
             [[ -z ${major-} ]] || {
                 # awk -f ~/Projects/Shell\ Operation/Bash/bash.d/sys_admin/apt_filt_ud.awk udlist
-                local awk_src=$( dirname "$( canonpath "${BASH_SOURCE[0]}" )" )/apt_filt_ud.awk
+                local awk_src=$( dirname "$( physpath "${BASH_SOURCE[0]}" )" )/apt_filt_ud.awk
                 ug_pkgs=$( awk -f "$awk_src" - <<< "$ug_pkgs" )
 
                 # count major upgrades
