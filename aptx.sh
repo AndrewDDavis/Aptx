@@ -17,9 +17,13 @@
 #   flex (2.6.4-8.2+b2 => 2.6.4-8.2+b3)
 # - maybe even have a --major-only option, to filter out updates in the 3rd digit, like 2.6.4 => 2.6.5
 
+# dependencies
+import_func physpath \
+    || return
+
 aptx() (
 
-    docstr="Perform Apt and Dpkg operations
+    : "Perform Apt and Dpkg operations
 
     This function facilitates common package management operations. It
     automatically invokes sudo when necessary (may request a password).
@@ -90,17 +94,16 @@ aptx() (
       -V : show version info for packages to be upgraded (or installed, etc.)
     "
 
-    [[ $# -eq 0 || $1 == @(-h|--help) ]] && {
-        docsh -DT "$docstr"
-        return 0
-    }
+    [[ $# -eq 0  || $1 == @(-h|--help) ]] \
+        && { docsh -DT; return; }
 
     # return on error
     trap 'trap-err $?; return'  ERR
     trap 'trap - ERR RETURN'    RETURN
 
     # check for apt
-    [[ -z $(command -v apt) ]] && err_msg 1 "apt not found"
+    [[ -n $( command -v apt ) ]] \
+        || { err_msg 9 "apt not found"; return; }
 
     # Prepend sudo when not root
     # - also echo the command line using set -x
@@ -287,7 +290,6 @@ aptx() (
 
             # if only major updates requested, filter the list
             [[ -z ${major-} ]] || {
-                # awk -f ~/Projects/Shell\ Operation/Bash/bash.d/sys_admin/apt_filt_ud.awk udlist
                 local awk_src=$( dirname "$( physpath "${BASH_SOURCE[0]}" )" )/apt_filt_ud.awk
                 ug_pkgs=$( awk -f "$awk_src" - <<< "$ug_pkgs" )
 

@@ -27,6 +27,11 @@
             sub(/-[0-9\.]+$/, "", versarr[i])
         }
 
+        # move on if version strings are now identical
+        # - e.g. for archivemount (1a-1 => 1a-1+b1)
+        if ( versarr[1] == versarr[2] )
+            next
+
         # if version scheme changed, that's major
         # - split on ':'
         nfa = split(versarr[1], verSchA, /:/)
