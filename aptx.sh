@@ -23,7 +23,7 @@ import_func physpath \
 
 aptx() (
 
-    : "Perform Apt and Dpkg operations
+    : """Perform Apt and Dpkg operations
 
     This function facilitates common package management operations. It
     automatically invokes sudo when necessary (may request a password).
@@ -92,7 +92,7 @@ aptx() (
 
       -U : update the index before running install, upgrade, etc.
       -V : show version info for packages to be upgraded (or installed, etc.)
-    "
+    """
 
     [[ $# -eq 0  || $1 == @(-h|--help) ]] \
         && { docsh -DT; return; }
@@ -234,7 +234,7 @@ aptx() (
     _lsupgr() {
         # Show a list of packages with pending upgrades
 
-        # options: "short" output, or major-versions only
+        # options: """short" output, or major-versions only
         local shrt_op major
         local OPT OPTARG OPTIND=1
         while getopts ':sm' OPT
